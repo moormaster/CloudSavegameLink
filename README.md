@@ -54,7 +54,7 @@ To replace the original savegame locations of each game you ran the following co
         C:\Scripts\CloudSavegameLink.bat "C:\Dropbox\Savegames\OriginGame"
         C:\Scripts\CloudSavegameLink.bat "C:\Dropbox\Savegames\OtherGame"
 
-The savegame directories of your games are no linked to the dropbox location
+The savegame directories of your games are now linked to the dropbox location
 
         C:\Savegame\Path\Of\MyFavoriteGame              <==> C:\Dropbox\Savegames\MyFavoriteGame
         C:\Games\Steam\SteamApps\common\SteamGame\saves <==> C:\Dropbox\Savegames\SteamGame
