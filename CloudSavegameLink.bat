@@ -17,7 +17,7 @@ set targetdir=!targetdir:"=!
 if "!targetdir!" == "" goto err_usage
 
 rem read global-config.bat
-if exist "%~dp0config.bat" call "%~dp0global-config.bat"
+if exist "%~dp0global-config.bat" call "%~dp0global-config.bat"
 
 rem read cloud target dir specific config.bat
 set config=!targetdir!\config.bat
