@@ -2,37 +2,37 @@
 setlocal enableextensions enabledelayedexpansion
 
 rem remove " from cloud target dir
-set targetdir="%~f1"
-set targetdir=!targetdir:"=!
+set clouddir="%~f1"
+set clouddir=!clouddir:"=!
 
-if "!targetdir!" == "" goto err_usage
+if "!clouddir!" == "" goto err_usage
 
 rem remove trailing backslash from cloud target dir
-set targetdir="!targetdir!"
-if "%targetdir:~-2,-1%" == "\" (
-  set targetdir="%targetdir:~1,-2%"
+set clouddir="!clouddir!"
+if "%clouddir:~-2,-1%" == "\" (
+  set clouddir="%clouddir:~1,-2%"
 )
-set targetdir=!targetdir:"=!
+set clouddir=!clouddir:"=!
 
-if "!targetdir!" == "" goto err_usage
+if "!clouddir!" == "" goto err_usage
 
 rem read global-config.bat
 if exist "%~dp0global-config.bat" call "%~dp0global-config.bat"
 
 rem read cloud target dir specific config.bat
-set config=!targetdir!\config.bat
+set config=!clouddir!\config.bat
 if not exist "!config!" goto err_config_not_found
 call "!config!"
 
 rem sanity checks
 if not exist "!savedir!" goto err_savedir_not_found
-if not exist "!targetdir!" goto err_targetdir_not_found
+if not exist "!clouddir!" goto err_clouddir_not_found
 
 echo savedir: !savedir!
-echo targetdir: !targetdir!
+echo clouddir: !clouddir!
 
 echo [-] importing extra files from existing savedir...
-robocopy /E /XC /XO /XN "!savedir!\\" "!targetdir!\\"
+robocopy /E /XC /XO /XN "!savedir!\\" "!clouddir!\\"
 
 echo [-] removing savedir...
 
@@ -46,7 +46,7 @@ if exist "!savedir!" (
 )
 
 echo [-] creating symlink...
-mklink /D "!savedir!" "!targetdir!"
+mklink /D "!savedir!" "!clouddir!"
 
 goto success
 
@@ -58,8 +58,8 @@ goto end
 echo savedir not found or variable savedir not set: !savedir!
 goto end
 
-:err_targetdir_not_found
-echo targetdir not found: !targetdir!
+:err_clouddir_not_found
+echo clouddir not found: !clouddir!
 goto end
 
 :err_usage
